@@ -1,0 +1,166 @@
+body {
+  margin: 5px 0 10px 0;
+}
+.header {
+  background: rgb(252, 100, 6);
+  width: 85vw;
+  height: 4vh;
+  margin: 0 auto;
+}
+/* @media (max-width: 820px) {
+  .header {
+    width: 100%;
+  }
+} */
+.logo {
+  width: 25px;
+  margin: 3px;
+  float: left;
+}
+.title {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding-left: 5px;
+  line-height: 4.5vh;
+}
+.head-title {
+  padding: 0px;
+  margin: 0px;
+}
+.head-title li {
+  list-style: none;
+  display: inline;
+}
+.head-select {
+  border-right: 1px solid black;
+  padding-right: 10px;
+  padding-left: 8px;
+  font-size: 20px;
+  display: inline-block;
+}
+.head-title li a {
+  text-decoration: none;
+  color: black;
+}
+.body-container {
+  background: rgb(244, 243, 234);
+  width: 85vw;
+  height: 1700px;
+  margin: 0 auto;
+}
+.body-container ol {
+  margin: 0px;
+  padding-left: 2rem;
+  color: gray;
+  font-size: 18px;
+}
+.body-container ol li{
+  padding: 0 0 10px 0;
+}
+.blank{
+  width: inherit;
+  height: 20px;
+}
+.main-title {
+  color: black;
+  font-size: 20px;
+}
+.main-sub-title{
+  color: gray;
+  font-size: 15px;
+  text-decoration: none;
+}
+.main-sub-title a:link{
+  color: grey;
+  text-decoration: none
+}
+.main-sub-title a:hover{
+  text-decoration: underline
+}
+.main-sub-title a:visited {
+  color: gray;
+}
+.sub-title {
+  margin-left: 21px;
+  color: grey;
+  font-size: 15px;
+}
+.line {
+  width: 85vw;
+  height: 2px;
+  background: rgb(252, 100, 6);
+  margin: auto;
+}
+.footer {
+  background: rgb(244, 243, 234);
+  width: 85vw;
+  height: 130px;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer ul {
+  margin: 5px 0 0 0;
+  padding: 0;
+  height: 10px;
+}
+.footer ul li {
+  display: inline-block;
+}
+.footer ul li a {
+  text-decoration: none;
+  color: black;
+}
+.footer-li {
+  border-right: 2px solid gray;
+  color: black;
+  padding-right: 8px;
+  padding-left: 6px;
+  font-size: 15px;
+}
+
+.footer-search {
+  font-size: 20px;
+  color: gray;
+}
+.footer-search-text {
+  position: relative;
+  bottom: -22px;
+}
+.footer-search-input {
+  width: 180px;
+  height: 20px;
+  position: relative;
+  bottom: -20px;
+}
+ol li {
+  padding: 5px;
+}
+.footer-p {
+  margin: 0 0 0 0;
+  padding: 15px 0 12px 0;
+  font-size: 1.3rem;
+  color: grey;
+  text-align: center;
+}
+.footer-p a:link {
+  color: gray;
+  text-decoration: none;
+}
+.footer-p a:visited {
+  color: gray;
+  text-decoration: none;
+}
+.link{
+  display: inline;
+}
+
+.link a:link{
+  color: gray;
+  text-decoration: none;
+}
+.link a:hover{
+  text-decoration: underline
+}
+.link a:visited {
+  color: gray;
+}
