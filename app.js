@@ -36,7 +36,11 @@ function bringId(num) {
     newsId = JSON.parse(ourRequest.responseText);
   };
   ourRequest.send();
-  draw(count, count + 30, num);
+  let last = count + 30;
+  if (last > newsId.length) {
+    last = newsId.length;
+  }
+  draw(count, last, num);
 }
 bringId(0);
 
@@ -46,7 +50,6 @@ function draw(first, last, num) {
     let ourRequest = new XMLHttpRequest();
     let li = document.createElement("li");
     let img = document.createElement("img");
-    img.setAttribute("class", "tri");
     img.setAttribute("src", "./img/triangle.png");
     img.style = "width: 15px;";
     let listCount = document.createElement("span");
@@ -140,7 +143,11 @@ function draw(first, last, num) {
 
 more.addEventListener("click", function() {
   count = count + 30;
-  draw(count, count + 30);
+  let last = count + 30;
+  if (last > newsId.length) {
+    last = newsId.length;
+  }
+  draw(count, last);
 });
 titleBtn.addEventListener("click", function() {
   count = 0;
