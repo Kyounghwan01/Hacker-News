@@ -1,7 +1,11 @@
-let newsId;
-let ar = [];
+let newsId
 let count = 0;
 let textInput = document.querySelector(".footer-search-input");
+const titleBtn = document.querySelector('.title');
+const newsBtn = document.querySelector('.news');
+const askBtn = document.querySelector('.ask');
+const showBtn = document.querySelector('.show');
+const jobsBtn = document.querySelector('.jobs');
 const ol = document.querySelector(".ol");
 let more = document.querySelector(".more");
 
@@ -13,22 +17,26 @@ textInput.addEventListener("keypress", function(e) {
   }
 });
 
-function bringId() {
+function bringId(text) {
+  let Artext = text;
+  let idArr = ['topstories','newstories','askstories','showstories','jobstories'];
   let ourRequest = new XMLHttpRequest();
   ourRequest.open(
     "GET",
-    "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+    `https://hacker-news.firebaseio.com/v0/${idArr[Artext]}.json?print=pretty`,
     false
   );
   ourRequest.onload = function() {
     newsId = JSON.parse(ourRequest.responseText);
   };
   ourRequest.send();
+  console.log(newsId)
 }
-bringId();
+bringId(0);
 
 
 function draw(first, last) {
+  ol.innerHTML = "";
   for (let i = first; i < last; i++) {
     let ourRequest = new XMLHttpRequest();
     let li = document.createElement("li");
@@ -117,8 +125,31 @@ function draw(first, last) {
 draw(count, count + 30);
 
 more.addEventListener("click", function() {
-  ol.innerHTML = "";
   count = count + 30;
   draw(count, count + 30);
 });
-
+titleBtn.addEventListener('click',function(){
+  count = 0;
+  bringId(0);
+  draw(count, count + 30);
+});
+newsBtn.addEventListener('click',function(){
+  count = 0;
+  bringId(1);
+  draw(count, count + 30);
+});
+askBtn.addEventListener('click',function(){
+  count = 0;
+  bringId(2);
+  draw(count, count + 30);
+});
+showBtn.addEventListener('click',function(){
+  count = 0;
+  bringId(3);
+  draw(count, count + 30);
+});
+jobsBtn.addEventListener('click',function(){
+  count = 0;
+  bringId(4);
+  draw(count, count + 30);
+});
