@@ -1,8 +1,8 @@
 let newsId;
+let ar = [];
 let count = 0;
 let textInput = document.querySelector(".footer-search-input");
 const ol = document.querySelector(".ol");
-let ourRequest = new XMLHttpRequest();
 let more = document.querySelector(".more");
 
 textInput.addEventListener("keypress", function(e) {
@@ -14,6 +14,7 @@ textInput.addEventListener("keypress", function(e) {
 });
 
 function bringId() {
+  let ourRequest = new XMLHttpRequest();
   ourRequest.open(
     "GET",
     "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
@@ -26,8 +27,10 @@ function bringId() {
 }
 bringId();
 
+
 function draw(first, last) {
   for (let i = first; i < last; i++) {
+    let ourRequest = new XMLHttpRequest();
     let li = document.createElement("li");
     let img = document.createElement("img");
     img.setAttribute("class", "tri");
@@ -40,14 +43,7 @@ function draw(first, last) {
     let subTitle = document.createElement("span");
     subTitle.classList.add("sub-title");
 
-    ourRequest.open(
-      "GET",
-      `https://hacker-news.firebaseio.com/v0/item/${
-        newsId[i]
-      }.json?print=pretty`,
-      false
-    );
-
+    
     ourRequest.onload = function() {
       let Data = JSON.parse(ourRequest.responseText);
       let currentTime = Number(
@@ -77,16 +73,14 @@ function draw(first, last) {
         DataTime = `${min} minutes`;
       }
 
-      let urlData = Data.url.substring(
-        Data.url.indexOf("/") + 2,
-        Data.url.indexOf("/", 9)
-      );
+      let a = document.createElement('a');
+      a.href = `${Data.url}`;
       let url =
         '<span class="main-sub-title">(' +
         "<a href= " +
-        `https://news.ycombinator.com/from?site=${urlData}` +
+        `https://news.ycombinator.com/from?site=${a.hostname}` +
         ">" +
-        urlData +
+        a.hostname +
         "</a>" +
         " )</span>";
       let title = "<a href= " + `${Data.url}` + ">" + Data.title + "</a>";
@@ -105,12 +99,19 @@ function draw(first, last) {
         " | " +
         `<p class="link"><a href=${link}>${Data.descendants} comments</a></p>`;
     };
-    ourRequest.send();
+
     li.appendChild(listCount);
     li.appendChild(img);
     li.appendChild(mainTitle);
     li.appendChild(subTitle);
     ol.appendChild(li);
+    ourRequest.open(
+      "GET",
+      `https://hacker-news.firebaseio.com/v0/item/${
+        newsId[i]
+      }.json?print=pretty`
+    );
+    ourRequest.send();
   }
 }
 draw(count, count + 30);
