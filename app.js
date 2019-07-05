@@ -1,13 +1,13 @@
-let newsId
-let count = 0;
-let textInput = document.querySelector(".footer-search-input");
-const titleBtn = document.querySelector('.title');
-const newsBtn = document.querySelector('.news');
-const askBtn = document.querySelector('.ask');
-const showBtn = document.querySelector('.show');
-const jobsBtn = document.querySelector('.jobs');
+const textInput = document.querySelector(".footer-search-input");
+const titleBtn = document.querySelector(".title");
+const newsBtn = document.querySelector(".news");
+const askBtn = document.querySelector(".ask");
+const showBtn = document.querySelector(".show");
+const jobsBtn = document.querySelector(".jobs");
 const ol = document.querySelector(".ol");
 let more = document.querySelector(".more");
+let newsId;
+let count = 0;
 
 textInput.addEventListener("keypress", function(e) {
   if (e.keyCode === 13) {
@@ -17,9 +17,15 @@ textInput.addEventListener("keypress", function(e) {
   }
 });
 
-function bringId(text) {
-  let Artext = text;
-  let idArr = ['topstories','newstories','askstories','showstories','jobstories'];
+function bringId(num) {
+  let Artext = num;
+  let idArr = [
+    "topstories",
+    "newstories",
+    "askstories",
+    "showstories",
+    "jobstories"
+  ];
   let ourRequest = new XMLHttpRequest();
   ourRequest.open(
     "GET",
@@ -30,12 +36,11 @@ function bringId(text) {
     newsId = JSON.parse(ourRequest.responseText);
   };
   ourRequest.send();
-  console.log(newsId)
+  draw(count, count + 30, num);
 }
 bringId(0);
 
-
-function draw(first, last) {
+function draw(first, last, num) {
   ol.innerHTML = "";
   for (let i = first; i < last; i++) {
     let ourRequest = new XMLHttpRequest();
@@ -51,7 +56,6 @@ function draw(first, last) {
     let subTitle = document.createElement("span");
     subTitle.classList.add("sub-title");
 
-    
     ourRequest.onload = function() {
       let Data = JSON.parse(ourRequest.responseText);
       let currentTime = Number(
@@ -81,16 +85,27 @@ function draw(first, last) {
         DataTime = `${min} minutes`;
       }
 
-      let a = document.createElement('a');
+      let a = document.createElement("a");
       a.href = `${Data.url}`;
-      let url =
-        '<span class="main-sub-title">(' +
-        "<a href= " +
-        `https://news.ycombinator.com/from?site=${a.hostname}` +
-        ">" +
-        a.hostname +
-        "</a>" +
-        " )</span>";
+      let url;
+      if (num === 2) {
+        url =
+          '<span class="main-sub-title">' +
+          "<a href= " +
+          `https://news.ycombinator.com/from?site=${a.hostname}` +
+          ">" +
+          a.hostname +
+          "</a></span>";
+      } else {
+        url =
+          '<span class="main-sub-title">( ' +
+          "<a href= " +
+          `https://news.ycombinator.com/from?site=${a.hostname}` +
+          ">" +
+          a.hostname +
+          "</a>" +
+          " )</span>";
+      }
       let title = "<a href= " + `${Data.url}` + ">" + Data.title + "</a>";
       mainTitle.innerHTML = ` <span class="link-title">${title}</span> ${url} <br>`;
       listCount.textContent = `${i + 1}. `;
@@ -122,34 +137,28 @@ function draw(first, last) {
     ourRequest.send();
   }
 }
-draw(count, count + 30);
 
 more.addEventListener("click", function() {
   count = count + 30;
   draw(count, count + 30);
 });
-titleBtn.addEventListener('click',function(){
+titleBtn.addEventListener("click", function() {
   count = 0;
   bringId(0);
-  draw(count, count + 30);
 });
-newsBtn.addEventListener('click',function(){
+newsBtn.addEventListener("click", function() {
   count = 0;
   bringId(1);
-  draw(count, count + 30);
 });
-askBtn.addEventListener('click',function(){
+askBtn.addEventListener("click", function() {
   count = 0;
   bringId(2);
-  draw(count, count + 30);
 });
-showBtn.addEventListener('click',function(){
+showBtn.addEventListener("click", function() {
   count = 0;
   bringId(3);
-  draw(count, count + 30);
 });
-jobsBtn.addEventListener('click',function(){
+jobsBtn.addEventListener("click", function() {
   count = 0;
   bringId(4);
-  draw(count, count + 30);
 });
