@@ -121,3 +121,4 @@ more.addEventListener("click", function() {
   count = count + 30;
   draw(count, count + 30);
 });
+
